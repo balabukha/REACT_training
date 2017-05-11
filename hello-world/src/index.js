@@ -82,10 +82,16 @@ ReactDOM.render(
 // example 2
 
 function LoginButton(props){
-    <button onClick={props.onClick}>Login</button>
+    return (
+        <button onClick={props.onClick}>Login</button>
+        )
+
 }
 function LogoutButton(props){
-    <button onClick={props.onClick}>Logout</button>
+    return (
+        <button onClick={props.onClick}>Logout</button>
+        )
+
 }
 
 class App2 extends React.Component{
@@ -103,7 +109,7 @@ class App2 extends React.Component{
     }
 
     render(){
-        const isLogged = this.state.isLogged;
+        let isLogged = this.state.isLogged;
         let button = null;
         if (isLogged) {
             button = <LogoutButton onClick={this.handleLogoutClick.bind(this)}/>
@@ -113,6 +119,7 @@ class App2 extends React.Component{
 
         return( // вывод в DOM
             <div>
+                <h4>hi!</h4>
                 <Greeting isLogged={isLogged} />
                 {button}
             </div>
@@ -124,3 +131,66 @@ ReactDOM.render(
     <App2 />,
     document.getElementById('root2')
 );
+
+// example 3
+
+function CheckingMail(props){
+
+    return (
+        <div>
+            <h4>Hello</h4>
+            {props.emails.length>0 &&
+            <h5>You have {props.emails.length} unread messages</h5>
+            }
+        </div>
+    )
+}
+const  emails = ['React1','React2','React3'];
+
+ReactDOM.render(
+    <CheckingMail emails={emails}/>,
+    document.getElementById('root3')
+);
+
+// example 4
+
+
+function WarningBanner(props) {
+    if (!props.warn) {
+        return null
+    }
+    return(
+        <div>Warning</div>
+    )
+}
+
+class Page extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            showWarning: true
+        }
+    }
+
+    handleToggleClick(){
+        this.setState({
+            showWarning: !this.state.showWarning
+        })
+    }
+    render(){
+        return(
+            <div>
+            <WarningBanner warn={this.state.showWarning}/>
+                <button onClick={this.handleToggleClick.bind(this)}>
+                    {this.state.showWarning? 'HIDE' : 'SHOW'}
+                </button>
+            </div>
+        )
+    }
+}
+
+ReactDOM.render(
+    <Page />,
+    document.getElementById('root4')
+);
+
