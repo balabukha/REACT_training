@@ -195,3 +195,76 @@ ReactDOM.render(
     document.getElementById('root4')
 );
 
+// example 5
+
+
+class Ex4 extends React.Component{
+    constructor(props){
+        super(props);
+
+    }
+    render(){
+        let arr = [1,2,3,4,5];
+        let newArr = arr.map((item)=> // newArr - новый массив с новыми значениями
+        <li key={item.toString()}>{item * 2}</li>);
+        console.log(newArr);
+
+        return(
+          <ul>{newArr}</ul>
+      )
+    }
+
+
+}
+
+ReactDOM.render(
+    <Ex4 />,
+    document.getElementById('root5')
+);
+
+// example 6
+
+const numbers = [10,20,30,40,50];
+
+
+function Li(props){
+    return(
+        <li>{props.item}</li>
+    )
+}
+
+function Ul(props){
+    const numbers = props.numbers;
+    let number;
+    number = numbers.map((item, index)=> <Li key={index} item={item}/>
+    );
+    return(
+        <ul>{number}</ul>
+)
+}
+
+ReactDOM.render(
+    <Ul numbers = {numbers}/>,
+    document.getElementById('root6')
+);
+
+
+// example 7
+
+function Li1(props) {
+    return(
+        {/*<li>{props.}</li>*/}
+    )
+}
+
+function Ul1(props){
+    return(
+        <p>{props.numbers}</p>
+    )
+}
+const numbers1= [1,2,3,4,5,6,7,8,9];
+
+ReactDOM.render(
+    <Ul1 numbers = {numbers1}/>,
+    document.getElementById('root7')
+)
