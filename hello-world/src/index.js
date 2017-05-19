@@ -253,13 +253,16 @@ ReactDOM.render(
 
 function Li1(props) {
     return(
-        {/*<li>{props.}</li>*/}
+        <li>{props.value}</li>
     )
 }
 
 function Ul1(props){
     return(
-        <p>{props.numbers}</p>
+        <ul>
+        {props.numbers.map((number, index)=>
+        <Li1 key={index.toString()} value={number} />)}
+        </ul>
     )
 }
 const numbers1= [1,2,3,4,5,6,7,8,9];
@@ -267,4 +270,54 @@ const numbers1= [1,2,3,4,5,6,7,8,9];
 ReactDOM.render(
     <Ul1 numbers = {numbers1}/>,
     document.getElementById('root7')
-)
+);
+
+// example 8
+
+class Example8 extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            value: ''
+        }
+    }
+    handleChangeText(event){
+        this.setState({
+            value: event.target.value
+        });
+        console.log(event.target.value);
+
+    };
+
+    onClickButtonSubmit(event){
+        event.preventDefault();
+        console.log('this value is: ' + this.state.value)
+    };
+
+    render(){
+        return(
+        <form action="#">
+            <input type="text" placeholder='some Text' onChange={this.handleChangeText.bind(this)}/>
+            <input type="text" placeholder='some new Text' defaultValue='some extra text'/>
+
+            <button onClick={this.onClickButtonSubmit.bind(this)}>
+                SEND
+            </button>
+        </form>
+        )
+    }
+
+}
+
+
+
+ReactDOM.render(
+    <Example8 />,
+    document.getElementById('root8')
+);
+
+// «checked», поддерживаемая компонентами «input» следующих типов: «checkbox» или «radio».
+// «selected», поддерживаемая компонентами «option»
+
+
+
